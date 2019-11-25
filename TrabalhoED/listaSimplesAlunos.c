@@ -67,20 +67,33 @@ listaSimplesAlunos *buscar(listaSimplesAlunos *L, int dado){ //FAZER ALTERAÇÕES
 }
 
 listaSimplesAlunos *calcularMedia(listaSimplesAlunos *L){
-    //rodar toda a lista para calcular a média de cada aluno
+    listaSimplesAlunos *aux = L;
+    if(aux!=NULL){
+        while (aux -> prox!=NULL){
+            aux->media = (aux->nota1 + aux->nota2)/2;
+            aux = aux->prox;
+        }
+    }
 }
 
-listaSimplesAlunos *buscarMaiorMedia(listaSimplesAlunos *L){ //FAZER ALTERAÇÕES
-	listaSimplesAlunos *aux = L;
-	while (aux != NULL){
-		if (aux->info == dado){
-			return aux;
-		}
-		else{
-			aux = aux->proximo;
-		}
+listaSimplesAlunos *buscarMaiorMedia(listaSimplesAlunos *L){
+	listaSimplesAlunos *maiorMedia, *aux = L;
+	maiorMedia->media = 0.0;
+	if(aux==NULL){
+        printf("A lista está vazia");
+        return NULL;
+	}else{
+        while (aux != NULL){
+            if (aux->media > maiorMedia->media){
+                maiorMedia = aux;
+            }
+            else{
+                aux = aux->proximo;
+            }
+        }
 	}
-	return aux;
+
+	return maiorMedia;
 }
 
 listaSimplesAlunos *alterarDados(listaSimplesAlunos *L){
