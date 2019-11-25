@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1574518552 source:/tmp/guest-0ske2r/AulaDeSabado/main.c
+	"listaSimples.h"
+	<stdio.h>
+	<stdlib.h>
+
+1574518535 /tmp/guest-0ske2r/AulaDeSabado/listaSimples.h
+
