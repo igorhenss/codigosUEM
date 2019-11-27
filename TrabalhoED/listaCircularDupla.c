@@ -6,7 +6,7 @@
 struct listaCircularDupla{
     int valor
     struct listaCircularDupla *pred;
-    struct listaCircularDupla *prox;'''''''''''''''
+    struct listaCircularDupla *prox;
 };
 
 listaCircularDupla *criar(){

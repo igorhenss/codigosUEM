@@ -11,93 +11,19 @@ struct listaSimplesAlunos{
     listaSimplesAlunos *prox;
 };
 
-listaSimplesAlunos *criar(){
-	return NULL;
+//MÃ‰TODOS COM RETORNO TIPOS BÃSICOS DE DADOS
+int menuAtualiza(){
+  int op;
+  printf("O que deseja editar?");
+  printf("\n1-Nome do aluno");
+  printf("\n2-Nota 1");
+  printf("\n3-Nota 2");
+  scanf(" %i", &op);
+  return op;
 }
 
-listaSimplesAlunos *alocar(char[50] nome, int ra, float n1, float n2){
-	listaSimplesAlunos *novo = (listaSimplesAlunos *) malloc (sizeof(listaSimplesAlunos));
-	if(novo == NULL){
-		printf("Erro na reserva de memoria");
-	}
-	else{
-		novo->nome = nome;
-		novo->ra = ra;
-		novo->nota1 = n1;
-		novo->nota2 = n2;
-		novo->media = 0.0;
-		novo->prox = NULL;
-	}
-	return novo;
-}
-
-listaSimplesAlunos *inserirFim(listaSimplesAlunos* L, char[50] nome, int ra, float n1, float n2){
-	listaSimplesAlunos *aux, *novo;
-	aux = L;
-	novo = alocar(nome, ra, n1, n2);
-	if (aux == NULL){
-		L = novo;
-	}
-	else{
-		while (aux->proximo != NULL){
-			aux = aux->prox;
-		}
-		aux->prox = novo;
-	}
-	return L;
-}
-
-listaSimplesAlunos *inserirInicio(listaSimplesAlunos* L, char[50] nome, int ra, float n1, float n2){
-	listaSimplesAlunos *novo = alocar(nome, ra, n1, n2);
-	novo->proximo = L;
-	L = novo;
-}
-
-listaSimplesAlunos *buscar(listaSimplesAlunos *L, int dado){ //FAZER ALTERAÇÕES
-	listaSimplesAlunos *aux = L;
-	while (aux != NULL){
-		if (aux->info == dado){
-			return aux;
-		}
-		else{
-			aux = aux->proximo;
-		}
-	}
-	return aux;
-}
-
-listaSimplesAlunos *calcularMedia(listaSimplesAlunos *L){
-    listaSimplesAlunos *aux = L;
-    if(aux!=NULL){
-        while (aux -> prox!=NULL){
-            aux->media = (aux->nota1 + aux->nota2)/2;
-            aux = aux->prox;
-        }
-    }
-}
-
-listaSimplesAlunos *buscarMaiorMedia(listaSimplesAlunos *L){
-	listaSimplesAlunos *maiorMedia, *aux = L;
-	maiorMedia->media = 0.0;
-	if(aux==NULL){
-        printf("A lista está vazia");
-        return NULL;
-	}else{
-        while (aux != NULL){
-            if (aux->media > maiorMedia->media){
-                maiorMedia = aux;
-            }
-            else{
-                aux = aux->proximo;
-            }
-        }
-	}
-
-	return maiorMedia;
-}
-
-listaSimplesAlunos *alterarDados(listaSimplesAlunos *L){
-    //criar código de alteração, menos média
+float calcularMedia(float n1, float n2){
+    return (n1+n2)/2;
 }
 
 void mostrar(listaSimplesAlunos *L){
@@ -113,15 +39,15 @@ void mostrar(listaSimplesAlunos *L){
             printf("\nRa: %i", aux->ra);
             printf("\nNota 1: %f", aux->nota1);
             printf("\nNota 2: %f", aux->nota2);
-            printf("\nMédia: %f", aux->media);
+            printf("\nMedia: %f", aux->media);
             printf("\n__________________________");
-            aux = aux->proximo;
+            aux = aux->prox;
 		}
 	}
 }
 
 void mostrarAprovados(listaSimplesAlunos *L){
-    listaSimplesAlunos *aux;
+  listaSimplesAlunos *aux;
 	aux = L;
 	if (aux == NULL){
 		printf("Lista vazia!");
@@ -134,16 +60,16 @@ void mostrarAprovados(listaSimplesAlunos *L){
                 printf("\nRa: %i", aux->ra);
                 printf("\nNota 1: %f", aux->nota1);
                 printf("\nNota 2: %f", aux->nota2);
-                printf("\nMédia: %f", aux->media);
+                printf("\nMedia: %f", aux->media);
                 printf("\n__________________________");
             }
-            aux = aux->proximo;
+            aux = aux->prox;
 		}
 	}
 }
 
 void mostrarReprovados(listaSimplesAlunos *L){
-    listaSimplesAlunos *aux;
+  listaSimplesAlunos *aux;
 	aux = L;
 	if (aux == NULL){
 		printf("Lista vazia!");
@@ -156,27 +82,141 @@ void mostrarReprovados(listaSimplesAlunos *L){
                 printf("\nRa: %i", aux->ra);
                 printf("\nNota 1: %f", aux->nota1);
                 printf("\nNota 2: %f", aux->nota2);
-                printf("\nMédia: %f", aux->media);
+                printf("\nMedia: %f", aux->media);
                 printf("\n__________________________");
             }
-            aux = aux->proximo;
+            aux = aux->prox;
 		}
 	}
 }
 
-listaSimplesAlunos *excluir(listaSimplesAlunos *L, int ra){
- 	listaSimplesAlunos *excluir;
+//MÃ‰TODOS COM RETORNO TIPO listaSimplesAlunos
+
+listaSimplesAlunos *criar(){
+	return NULL;
+}
+
+listaSimplesAlunos *alocar(char[50] nome, int ra, float n1, float n2, float media){
+	listaSimplesAlunos *novo = (listaSimplesAlunos *) malloc (sizeof(listaSimplesAlunos));
+	if(novo == NULL){
+		printf("Erro na reserva de memoria");
+	}else{
+		novo->nome = nome;
+		novo->ra = ra;
+		novo->nota1 = n1;
+		novo->nota2 = n2;
+		novo->media = calcularMedia(n1, n2);
+		novo->prox = NULL;
+	}
+	return novo;
+}
+
+listaSimplesAlunos *inserirFim(listaSimplesAlunos* L, char[50] nome, int ra, float n1, float n2, float media){
+	listaSimplesAlunos *novo, *aux = L;
+	novo = alocar(nome, ra, n1, n2, media);
+	if (aux == NULL){ // Confere se L ainda estÃ¡ vazia
+		aux = novo;
+    novo->prox = NULL;
+	}else{ // Se L nÃ£o estiver vazia
+		while (aux->prox != NULL){ //rodadno a lista atÃ© achar o Ãºltimo
+			aux = aux->prox;
+		}
+		aux->prox = novo;
+    novo->prox = NULL;
+	}
+	return aux;
+}
+
+listaSimplesAlunos *inserirInicio(listaSimplesAlunos* L, char[50] nome, int ra, float n1, float n2, float media){
+  listaSimplesAlunos *novo = alocar(nome, ra, n1, n2, media);
+  if(aux==NULL){
+  	aux = novo;
+  }else{
+    novo->prox = aux->prox;
+    aux = novo;
+  }
+	return aux;
+}
+
+listaSimplesAlunos *buscar(listaSimplesAlunos *L, int dado){
 	listaSimplesAlunos *aux = L;
-	excluir = buscar(L, ra);
-	if(excluir != NULL){
-		if (aux == excluir){ 	//se for excluir o primeiro
-			L = excluir->proximo;
+	while (aux != NULL){
+		if (aux->info == dado){
+			return aux;
 		}
 		else{
-			while(aux->proximo!= excluir) {
-				aux = aux->proximo;
+			aux = aux->prox;
+		}
+	}
+	return aux;
+}
+
+listaSimplesAlunos *buscarMaiorMedia(listaSimplesAlunos *L){
+	listaSimplesAlunos *maiorMedia, *aux = L;
+	maiorMedia->media = 0.0;
+	if(aux==NULL){
+        printf("A lista estÃ¡ vazia");
+        return NULL;
+	}else{
+        while (aux != NULL){
+            if (aux->media > maiorMedia->media){
+                maiorMedia = aux;
+            }
+            else{
+                aux = aux->prox;
+            }
+        }
+	}
+
+	return maiorMedia;
+}
+
+listaSimplesAlunos *alterarDados(listaSimplesAlunos *L){
+  listaSimplesAlunos *aux = L;
+  int ra;
+  printf("Informe o RA do aluno: ");
+  scanf(" %i", &ra);
+  while(aux!=NULL){
+    if(aux->ra){
+      int op = menuAtualiza();
+      switch (op) {
+        case 1:
+          printf("Informe o nome:");
+          gets(aux->nome);
+          printf("Pronto! O novo nome Ã©: %s", aux->nome);
+        break;
+        case 2:
+          printf("Informe a nota 1:");
+          scanf(aux->n1);
+          aux->media = calcularMedia(aux->n1, aux->n2);
+          printf("Pronto! A nova nota Ã© %f e a nova mÃ©dia Ã© %f", aux->n1, aux->media);
+        break;
+        case 3:
+          printf("Informe a nota 2:");
+          scanf(aux->n2);
+          aux->media = calcularMedia(aux->n1, aux->n2);
+          printf("Pronto! A nova nota Ã© %f e a nova mÃ©dia Ã© %f", aux->n2, aux->media);
+        break;
+        default:
+          printf("A opÃ§Ã£o Ã© invÃ¡lida");
+        break;
+      }
+    }
+  }
+}
+
+listaSimplesAlunos *excluir(listaSimplesAlunos *L, int ra){
+ 	listaSimplesAlunos *excluir, *aux = L;
+	excluir = buscar(aux, ra);
+	if(excluir != NULL){
+		if (aux == excluir){ 	//se for excluir o primeiro
+			aux = excluir->prox;
+		}
+		else{
+			while(aux->prox!= excluir) {
+				aux = aux->prox;
 			}
-			aux->proximo = excluir->proximo;
+			aux->prox = excluir->prox;
 		}
 		free(excluir); // OU delete excluir; //(em C++)
 	}
@@ -185,6 +225,3 @@ listaSimplesAlunos *excluir(listaSimplesAlunos *L, int ra){
 	}
 	return L;
  }
-
-
-
