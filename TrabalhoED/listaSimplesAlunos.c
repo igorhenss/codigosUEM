@@ -111,6 +111,17 @@ listaSimplesAlunos *alocar(char[50] nome, int ra, float n1, float n2, float medi
 	return novo;
 }
 
+listaSimplesAlunos *inserirInicio(listaSimplesAlunos* L, char[50] nome, int ra, float n1, float n2, float media){
+  listaSimplesAlunos *novo = alocar(nome, ra, n1, n2, media);
+  if(aux==NULL){
+  	aux = novo;
+  }else{
+    novo->prox = aux;
+    aux = novo;
+  }
+	return aux;
+}
+
 listaSimplesAlunos *inserirFim(listaSimplesAlunos* L, char[50] nome, int ra, float n1, float n2, float media){
 	listaSimplesAlunos *novo, *aux = L;
 	novo = alocar(nome, ra, n1, n2, media);
@@ -124,17 +135,6 @@ listaSimplesAlunos *inserirFim(listaSimplesAlunos* L, char[50] nome, int ra, flo
 		aux->prox = novo;
     novo->prox = NULL;
 	}
-	return aux;
-}
-
-listaSimplesAlunos *inserirInicio(listaSimplesAlunos* L, char[50] nome, int ra, float n1, float n2, float media){
-  listaSimplesAlunos *novo = alocar(nome, ra, n1, n2, media);
-  if(aux==NULL){
-  	aux = novo;
-  }else{
-    novo->prox = aux->prox;
-    aux = novo;
-  }
 	return aux;
 }
 
