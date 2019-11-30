@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1575124303 source:/comp/Lista_Estatica/Lista_Estatica.c
+	"Lista_Estatica.h"
+	<stdio.h>
+	<stdlib.h>
+
+1575121240 /comp/Lista_Estatica/Lista_Estatica.h
+
+1575123927 source:/comp/Lista_Estatica/main.c
+	"Lista_Estatica.h"
+	<stdio.h>
+	<stdlib.h>
+
