@@ -99,8 +99,8 @@ listaCircularDupla *excluir(listaCircularDupla *L, int valor){
 	return L;
  }
 
-void liberar(CircularDupla *L){
-    CircularDupla *excluir;
+void liberar(listaCircularDupla *L){
+    listaCircularDupla *excluir;
     while(L!=NULL){
         excluir=L;
         L=L->prox;
