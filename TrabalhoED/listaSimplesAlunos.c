@@ -26,8 +26,8 @@ float calcularMedia(float n1, float n2){
     return (n1+n2)/2;
 }
 
-void mostrar(listaSimplesAlunos *L){
-	listaSimplesAlunos *aux;
+void mostrar(Alunos *L){
+	Alunos *aux;
 	aux = L;
 	if (aux == NULL){
 		printf("Lista vazia!");
@@ -46,13 +46,14 @@ void mostrar(listaSimplesAlunos *L){
 	}
 }
 
-void mostrarAprovados(listaSimplesAlunos *L){
-  listaSimplesAlunos *aux;
+void mostrarAprovados(Alunos *L){
+  Alunos *aux;
 	aux = L;
 	if (aux == NULL){
 		printf("Lista vazia!");
 	}
 	else{
+    printf("\nLista dos reprovados:");
 		while (aux != NULL){
             if(aux->media>=6.0){
                 printf("\n__________________________");
@@ -68,13 +69,14 @@ void mostrarAprovados(listaSimplesAlunos *L){
 	}
 }
 
-void mostrarReprovados(listaSimplesAlunos *L){
-  listaSimplesAlunos *aux;
+void mostrarReprovados(Alunos *L){
+  Alunos *aux;
 	aux = L;
 	if (aux == NULL){
 		printf("Lista vazia!");
 	}
 	else{
+    printf("\nLista dos reprovados:");
 		while (aux != NULL){
             if(aux->media<6.0){
                 printf("\n__________________________");
@@ -90,14 +92,14 @@ void mostrarReprovados(listaSimplesAlunos *L){
 	}
 }
 
-//MÉTODOS COM RETORNO TIPO listaSimplesAlunos
+//MÉTODOS COM RETORNO TIPO Alunos
 
-listaSimplesAlunos *criar(){
+Alunos *criar(){
 	return NULL;
 }
 
-listaSimplesAlunos *alocar(char[50] nome, int ra, float n1, float n2, float media){
-	listaSimplesAlunos *novo = (listaSimplesAlunos *) malloc (sizeof(listaSimplesAlunos));
+Alunos *alocar(char[50] nome, int ra, float n1, float n2){
+	Alunos *novo = (Alunos *) malloc (sizeof(Alunos));
 	if(novo == NULL){
 		printf("Erro na reserva de memoria");
 	}else{
@@ -111,9 +113,11 @@ listaSimplesAlunos *alocar(char[50] nome, int ra, float n1, float n2, float medi
 	return novo;
 }
 
-listaSimplesAlunos *inserirInicio(listaSimplesAlunos* L, char[50] nome, int ra, float n1, float n2, float media){
-  listaSimplesAlunos *novo = alocar(nome, ra, n1, n2, media);
-  if(aux==NULL){
+Alunos *inserirInicio(Alunos* L, char[50] nome, int ra, float n1, float n2){
+  Alunos *aux, *novo;
+  novo = alocar(nome, ra, n1, n2);
+  aux = L;
+  if(aux == NULL){
   	aux = novo;
   }else{
     novo->prox = aux;
@@ -122,26 +126,26 @@ listaSimplesAlunos *inserirInicio(listaSimplesAlunos* L, char[50] nome, int ra, 
 	return aux;
 }
 
-listaSimplesAlunos *inserirFim(listaSimplesAlunos* L, char[50] nome, int ra, float n1, float n2, float media){
-	listaSimplesAlunos *novo, *aux = L;
-	novo = alocar(nome, ra, n1, n2, media);
+Alunos *inserirFim(Alunos* L, char[50] nome, int ra, float n1, float n2){
+	Alunos *aux, *novo;
+	novo = alocar(nome, ra, n1, n2);
+  aux = L;
 	if (aux == NULL){ // Confere se L ainda está vazia
 		aux = novo;
     novo->prox = NULL;
 	}else{ // Se L não estiver vazia
-		while (aux->prox != NULL){ //rodadno a lista até achar o último
+		while (aux->prox != NULL){ //roda a lista até achar o último
 			aux = aux->prox;
 		}
 		aux->prox = novo;
-    novo->prox = NULL;
 	}
 	return aux;
 }
 
-listaSimplesAlunos *buscar(listaSimplesAlunos *L, int dado){
-	listaSimplesAlunos *aux = L;
+Alunos *buscar(Alunos *L, int raBusca){
+	Alunos *aux = L;
 	while (aux != NULL){
-		if (aux->info == dado){
+		if (aux->ra == raBusca){
 			return aux;
 		}
 		else{
@@ -151,8 +155,8 @@ listaSimplesAlunos *buscar(listaSimplesAlunos *L, int dado){
 	return aux;
 }
 
-listaSimplesAlunos *buscarMaiorMedia(listaSimplesAlunos *L){
-	listaSimplesAlunos *maiorMedia, *aux = L;
+Alunos *buscarMaiorMedia(Alunos *L){
+	Alunos *maiorMedia, *aux = L;
 	maiorMedia->media = 0.0;
 	if(aux==NULL){
         printf("A lista está vazia");
@@ -171,13 +175,13 @@ listaSimplesAlunos *buscarMaiorMedia(listaSimplesAlunos *L){
 	return maiorMedia;
 }
 
-listaSimplesAlunos *alterarDados(listaSimplesAlunos *L){
-  listaSimplesAlunos *aux = L;
-  int ra;
+Alunos *alterarDados(Alunos *L){
+  Alunos *aux = L;
+  int raAlterar;
   printf("Informe o RA do aluno: ");
-  scanf(" %i", &ra);
+  scanf(" %i", &raAlterar);
   while(aux!=NULL){
-    if(aux->ra){
+    if(aux->ra == raAlterar){
       int op = menuAtualiza();
       switch (op) {
         case 1:
@@ -205,8 +209,8 @@ listaSimplesAlunos *alterarDados(listaSimplesAlunos *L){
   }
 }
 
-listaSimplesAlunos *excluir(listaSimplesAlunos *L, int ra){
- 	listaSimplesAlunos *excluir, *aux = L;
+Alunos *excluir(Alunos *L, int ra){
+ 	Alunos *excluir, *aux = L;
 	excluir = buscar(aux, ra);
 	if(excluir != NULL){
 		if (aux == excluir){ 	//se for excluir o primeiro

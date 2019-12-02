@@ -11,10 +11,9 @@ Alunos* inserirInicio(Alunos *L, char[50] nome, int ra, float n1, float n2);
 Alunos* calcularMedia(Alunos *L);
 Alunos* buscarMaiorMedia(Alunos *L);
 Alunos* alterarDados(Alunos *L);
+Alunos* excluir(Alunos* L, int ra);
 void mostrar(Alunos *L);
 void mostrarAprovados(Alunos *L);
 void mostrarReprovados(Alunos *L);
-Alunos* excluir(Alunos* L, int ra);
-
 
 #endif // LISTASIMPLESALUNOS_H_INCLUDED

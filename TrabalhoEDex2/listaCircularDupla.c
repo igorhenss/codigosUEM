@@ -27,37 +27,9 @@ listaCircularDupla *alocar(int valor){
 }
 
 listaCircularDupla *inserirFim(listaCircularDupla* L, int valor){
-	listaCircularDupla *novo;
+	listaCircularDupla *novo, *aux;
 	novo = alocar(valor);
-	if (L == NULL){
-		L = novo;
-		L->pred = L;
-		L->prox = L;
-	}
-	else{
-        novo->prox = L;
-		novo->pred = L->pred;
-		L->pred->prox = novo;
-		L = novo;
-	}
-	return L;
-}
-
-listaCircularDupla *inserirInicio(listaCircularDupla* L, int valor){
-	listaCircularDupla *novo;
-	novo = alocar(valor);
-	if (L == NULL){
-		L = novo;
-		L->pred = L;
-		L->prox = L;
-	}
-	else{
-        novo->prox = L;
-		novo->pred = L->pred;
-		L->pred->prox = novo;
-		L->pred =novo;
-	}
-	return L;
+  aux = L;
 }
 
 listaCircularDupla *buscar(listaCircularDupla *L, int dado){
