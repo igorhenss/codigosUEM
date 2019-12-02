@@ -27,22 +27,33 @@ listaCircularDupla *alocar(int valor){
 }
 
 listaCircularDupla *inserirFim(listaCircularDupla* L, int valor){
-	listaCircularDupla *novo, *aux;
-	novo = alocar(valor);
-  aux = L;
+	listaCircularDupla *novo = alocar(valor);
+	if(L==NULL){
+		L=valor;
+		L->pred=L;
+		L->pred=L;
+	}
+	else{
+		novo->prox=L;
+		novo->pred=L->pred;
+		L->pred->prox=valor;
+		L->pred=novo;
+	}
+	return L;
 }
 
 listaCircularDupla *buscar(listaCircularDupla *L, int dado){
-	listaCircularDupla *aux = L;
-	while (aux != NULL){
-		if (aux->valor == dado){
-			return aux;
+	listaCircularDupla *aux = L, *achou=NULL;
+	do{
+		if(aux->valor==dado){
+			achou=aux;
+			break;
 		}
 		else{
-			aux = aux->proximo;
+			aux=aux->prox;
 		}
-	}
-	return aux;
+	}while(aux!=L->pred);
+	return achou;
 }
 
 void mostrar(listaCircularDupla *L){
@@ -86,3 +97,13 @@ listaCircularDupla *excluir(listaCircularDupla *L, int valor){
 	}
 	return L;
  }
+
+void liberar(listaCircularDupla *L){
+    listaCircularDupla *excluir;
+    while(L!=NULL){
+        excluir=L;
+        L=L->prox;
+        free(excluir);
+    }
+    free(L);
+}
