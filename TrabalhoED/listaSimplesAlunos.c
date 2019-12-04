@@ -3,12 +3,12 @@
 #include "listaSimplesAlunos.h"
 
 struct listaSimplesAlunos{
-    char[50] nome;
+    char nome[50] ;
     int ra;
     float nota1;
     float nota2;
     float media;
-    listaSimplesAlunos *prox;
+    struct listaSimplesAlunos *prox;
 };
 
 //MÉTODOS COM RETORNO TIPOS BÁSICOS DE DADOS
@@ -98,12 +98,12 @@ Alunos *criar(){
 	return NULL;
 }
 
-Alunos *alocar(char[50] nome, int ra, float n1, float n2){
+Alunos *alocar(char nome[50] , int ra, float n1, float n2){
 	Alunos *novo = (Alunos *) malloc (sizeof(Alunos));
 	if(novo == NULL){
 		printf("Erro na reserva de memoria");
 	}else{
-		novo->nome = nome;
+		novo->nome[50] = nome;
 		novo->ra = ra;
 		novo->nota1 = n1;
 		novo->nota2 = n2;
@@ -113,7 +113,7 @@ Alunos *alocar(char[50] nome, int ra, float n1, float n2){
 	return novo;
 }
 
-Alunos *inserirInicio(Alunos* L, char[50] nome, int ra, float n1, float n2){
+Alunos *inserirInicio(Alunos* L, char nome[50] , int ra, float n1, float n2){
   Alunos *aux, *novo;
   novo = alocar(nome, ra, n1, n2);
   aux = L;
@@ -126,7 +126,7 @@ Alunos *inserirInicio(Alunos* L, char[50] nome, int ra, float n1, float n2){
 	return aux;
 }
 
-Alunos *inserirFim(Alunos* L, char[50] nome, int ra, float n1, float n2){
+Alunos *inserirFim(Alunos* L, char nome[50] , int ra, float n1, float n2){
 	Alunos *aux, *novo;
 	novo = alocar(nome, ra, n1, n2);
   aux = L;
@@ -192,14 +192,14 @@ Alunos *alterarDados(Alunos *L){
         case 2:
           printf("Informe a nota 1:");
           scanf(aux->n1);
-          aux->media = calcularMedia(aux->n1, aux->n2);
-          printf("Pronto! A nova nota é %f e a nova média é %f", aux->n1, aux->media);
+          aux->media = calcularMedia(aux->nota1, aux->nota2);
+          printf("Pronto! A nova nota é %f e a nova média é %f", aux->nota1, aux->media);
         break;
         case 3:
           printf("Informe a nota 2:");
-          scanf(aux->n2);
-          aux->media = calcularMedia(aux->n1, aux->n2);
-          printf("Pronto! A nova nota é %f e a nova média é %f", aux->n2, aux->media);
+          scanf(aux->nota2);
+          aux->media = calcularMedia(aux->nota1, aux->nota2);
+          printf("Pronto! A nova nota é %f e a nova média é %f", aux->nota2, aux->media);
         break;
         default:
           printf("A opção é inválida");
