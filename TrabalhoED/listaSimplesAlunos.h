@@ -6,8 +6,8 @@ typedef struct listaSimplesAlunos Alunos;
 
 //funcoes exportadas
 Alunos* criar();
-Alunos* inserirFim(Alunos *L, char[50] nome, int ra, float n1, float n2);
-Alunos* inserirInicio(Alunos *L, char[50] nome, int ra, float n1, float n2);
+Alunos* inserirFim(Alunos *L, char nome[50] , int ra, float n1, float n2);
+Alunos* inserirInicio(Alunos *L, char nome[50] , int ra, float n1, float n2);
 Alunos* calcularMedia(Alunos *L);
 Alunos* buscarMaiorMedia(Alunos *L);
 Alunos* alterarDados(Alunos *L);
