@@ -92,7 +92,19 @@ void mostrarReprovados(Alunos *L){
 	}
 }
 
+void liberar(Alunos *L){
+	Alunos *excluir;
+	while(L != NULL){
+	 	excluir = L;
+		L = L->prox;
+		free(excluir);
+	}
+	free(L);
+}
+
 //MÉTODOS COM RETORNO TIPO Alunos
+
+
 
 Alunos *criar(){
 	return NULL;
@@ -170,9 +182,12 @@ Alunos *buscarMaiorMedia(Alunos *L){
                 aux = aux->prox;
             }
         }
+		printf("\nNome do aluno: %s", maiorMedia->nome);
+        printf("\nRa: %i", maiorMedia->ra);
+        printf("\nNota 1: %f", maiorMedia->nota1);
+        printf("\nNota 2: %f", maiorMedia->nota2);
+        printf("\nMedia: %f", maiorMedia->media);
 	}
-
-	return maiorMedia;
 }
 
 Alunos *alterarDados(Alunos *L){
@@ -187,22 +202,22 @@ Alunos *alterarDados(Alunos *L){
         case 1:
           printf("Informe o nome:");
           gets(aux->nome);
-          printf("Pronto! O novo nome é: %s", aux->nome);
+          printf("Pronto! O novo nome eh: %s", aux->nome);
         break;
         case 2:
           printf("Informe a nota 1:");
           scanf(aux->n1);
           aux->media = calcularMedia(aux->nota1, aux->nota2);
-          printf("Pronto! A nova nota é %f e a nova média é %f", aux->nota1, aux->media);
+          printf("Pronto! A nova nota eh %f e a nova media eh %f", aux->nota1, aux->media);
         break;
         case 3:
           printf("Informe a nota 2:");
           scanf(aux->nota2);
           aux->media = calcularMedia(aux->nota1, aux->nota2);
-          printf("Pronto! A nova nota é %f e a nova média é %f", aux->nota2, aux->media);
+          printf("Pronto! A nova nota eh %f e a nova media eh %f", aux->nota2, aux->media);
         break;
         default:
-          printf("A opção é inválida");
+          printf("A opção eh invalida");
         break;
       }
     }
