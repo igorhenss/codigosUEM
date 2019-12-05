@@ -68,11 +68,9 @@ int main(){
             mostrar(L);
             break;
         case 7:
-            printf("Alunos aprovados: ");
             mostrarAprovados(L);
             break;
         case 8:
-            printf("Alunos reprovados: ");
             mostrarReprovados(L);
             break;
         }
