@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "listaSimplesAlunos.h"
 
 int menu(){
@@ -30,7 +31,6 @@ int main(){
         switch (opcao)
         {
         case 1:
-            setbuf(NULL, NULL);
             printf("\nInsira o nome do aluno: ");
             scanf("%[^\n]s", nome);
             printf("\nInsira o RA do aluno: ");
@@ -55,6 +55,7 @@ int main(){
         case 3:
             printf("Aluno com maior media: ");
             aluno = buscarMaiorMedia(L);
+            mostraAluno(aluno);
             /*printf("\nNome do aluno: %s", aluno->nome);
             printf("\nRa: %i", aluno->ra);
             printf("\nNota 1: %f", aluno->nota1);
@@ -62,25 +63,30 @@ int main(){
             printf("\nMedia: %f", aluno->media);*/
             break;
         case 4:
-            printf("Informe o RA do aluno: ");
+            printf("\nInforme o RA do aluno: ");
             scanf("%i", &ra);
             alterarDados(L, ra);
             break;
         case 5:
+            printf("\nAlunos: ");
+            mostrar(L);
+            break;
+        case 6:
+            printf("\nAlunos aprovados:\n");
+            mostrarAprovados(L);
+            break;
+        case 7:
+            printf("\nAlunos reprovados:\n");
+            mostrarReprovados(L);
+            break;
+        case 8:
             printf("\nInsira o RA do aluno que deseja excluir: ");
             scanf("%d",&ra);
             L = excluir(L, ra);
             break;
-        case 6:
-            printf("\nAlunos: ");
-            mostrar(L);
-            break;
-        case 7:
-            mostrarAprovados(L);
-            break;
-        case 8:
-            mostrarReprovados(L);
-            break;
+        default:
+              printf("\nOpção inválida, tente novamente.");
+              break;
         }
     } while(opcao);
     liberar(L);

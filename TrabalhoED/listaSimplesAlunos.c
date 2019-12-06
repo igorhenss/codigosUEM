@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+d
 #include "listaSimplesAlunos.h"
 
 struct listaSimplesAlunos{
@@ -10,6 +11,9 @@ struct listaSimplesAlunos{
     float media;
     struct listaSimplesAlunos *prox;
 };
+
+typedef struct listaSimplesAlunos Alunos;
+
 
 //M�TODOS DE USO INTERNO
 int menuAtualiza(){
@@ -39,7 +43,6 @@ Alunos *buscar(Alunos *L, int raBusca){
 	}
 	return achou;
 }
-
 
 //M�TODOS PARA A MAIN
 
@@ -78,7 +81,7 @@ Alunos *inserirInicio(Alunos* L, char nome[50] , int ra, float n1, float n2){
 Alunos *inserirFim(Alunos* L, char nome[50] , int ra, float n1, float n2){
 	Alunos *aux, *novo;
 	novo = alocar(nome, ra, n1, n2);
-    aux = L;
+  aux = L;
 	if (aux == NULL){ // Confere se L ainda est� vazia
 		aux = novo;
 	}else{ // Se L n�o estiver vazia
@@ -95,7 +98,7 @@ Alunos *inserirFim(Alunos* L, char nome[50] , int ra, float n1, float n2){
 Alunos *buscarMaiorMedia(Alunos *L){
 	Alunos *maiorMedia, *aux = L;
 	maiorMedia = NULL;
-	if(aux==NULL){
+	if(aux == NULL){
         printf("A lista est� vazia");
 	}else{
         while (aux != NULL){
@@ -110,6 +113,21 @@ Alunos *buscarMaiorMedia(Alunos *L){
   return maiorMedia;
 }
 
+void mostraAluno(Aluno *aluno){
+  if (aluno == NULL){
+		printf("Campo vazio!");
+	}else{
+      printf("\n__________________________");
+			printf("\nNome do aluno: %s", aluno->nome);
+      printf("\nRa: %i", aluno->ra);
+      printf("\nNota 1: %.2f", aluno->nota1);
+      printf("\nNota 2: %.2f", aluno->nota2);
+      printf("\nMedia: %.2f", aluno->media);
+      printf("\n__________________________");
+		}
+	}
+}
+
 void alterarDados(Alunos *L, int raAlterar){
   Alunos *alunoPraMudar, *aux = L;
   char nome[50] ;
@@ -121,7 +139,7 @@ void alterarDados(Alunos *L, int raAlterar){
       case 1:
         printf("\nInforme o nome:");
         scanf("%[^\n]s", nome);
-        strcpy(nome, alunoPraMudar->nome);
+        strcpy(alunoPraMudar->nome, nome);
         printf("\nPronto! O novo nome eh: %s", alunoPraMudar->nome);
         break;
       case 2:
@@ -153,14 +171,14 @@ void mostrar(Alunos *L){
 	}
 	else{
 		while (aux != NULL){
-            printf("\n__________________________");
+      printf("\n__________________________");
 			printf("\nNome do aluno: %s", aux->nome);
-            printf("\nRa: %i", aux->ra);
-            printf("\nNota 1: %.2f", aux->nota1);
-            printf("\nNota 2: %.2f", aux->nota2);
-            printf("\nMedia: %.2f", aux->media);
-            printf("\n__________________________");
-            aux = aux->prox;
+      printf("\nRa: %i", aux->ra);
+      printf("\nNota 1: %.2f", aux->nota1);
+      printf("\nNota 2: %.2f", aux->nota2);
+      printf("\nMedia: %.2f", aux->media);
+      printf("\n__________________________");
+      aux = aux->prox;
 		}
 	}
 }
@@ -226,7 +244,7 @@ Alunos *excluir(Alunos *L, int ra){
 	else{
 		printf("\nElemento nao encontrado");
 	}
-	return L;
+	return aux;
  }
 
  void liberar(Alunos *L){
