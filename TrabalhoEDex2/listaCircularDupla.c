@@ -4,7 +4,7 @@
 
 
 struct listaCircularDupla{
-    int valor
+    int valor;
     struct listaCircularDupla *pred;
     struct listaCircularDupla *prox;
 };
@@ -29,14 +29,14 @@ listaCircularDupla *alocar(int valor){
 listaCircularDupla *inserirFim(listaCircularDupla* L, int valor){
 	listaCircularDupla *novo = alocar(valor);
 	if(L==NULL){
-		L=valor;
+		L = novo;
 		L->pred=L;
-		L->pred=L;
+		L->prox=L;
 	}
 	else{
 		novo->prox=L;
 		novo->pred=L->pred;
-		L->pred->prox=valor;
+		L->pred->prox = novo;
 		L->pred=novo;
 	}
 	return L;
@@ -67,7 +67,7 @@ void mostrar(listaCircularDupla *L){
             printf("\n__________________________");
 			printf("\n%i", aux->valor);
             printf("\n__________________________");
-            aux = aux->proximo;
+            aux = aux->prox;
 		}
 	}
 }

@@ -1,10 +1,7 @@
-#ifndef LISTASIMPLESALUNOS_H_INCLUDED
-#define LISTASIMPLESALUNOS_H_INCLUDED
+#ifndef LISTASIMPLESALUNOS_H
+#define LISTASIMPLESALUNOS_H
 
-//tipo exportado
 typedef struct listaSimplesAlunos Alunos;
-
-//funcoes exportadas
 
 void liberar(Alunos *L);
 Alunos* criar();

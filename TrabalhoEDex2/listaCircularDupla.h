@@ -4,7 +4,7 @@
 typedef struct listaCircularDupla Lista;
 
 //funcoes exportadas
-Alunos* criar();
+Lista* criar();
 Lista* inserirFim(Lista *L, int valor);
 Lista* inserirInicio(Lista *L, int valor);
 Lista* buscar(Lista *L, int valor);

@@ -1,6 +1,6 @@
+#include "listaSimplesAlunos.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "listaSimplesAlunos.h"
 
 int menu(){
     int opcao;
@@ -25,16 +25,15 @@ int main(){
     char nome[50];
     Alunos *L, *aluno;
     L = criar();
-    do`
+    do {
         opcao = menu();
         switch (opcao)
         {
         case 1:
-            setbuf(NULL, NULL);
             printf("\nInsira o nome do aluno: ");
-            scanf("%[^\n]s", nome);
+            scanf("%s", nome);
             printf("\nInsira o RA do aluno: ");
-            scanf("%d",&ra);
+            scanf("%d", &ra);
             printf("\nInsira a nota 1: ");
             scanf("%f", &n1);
             printf("\nInsira a nota 2: ");
@@ -43,7 +42,7 @@ int main(){
             break;
         case 2:
             printf("\nInsira o nome do aluno: ");
-            scanf("%[^\n]s", nome);
+            scanf("%s", nome);
             printf("\nInsira o RA do aluno: ");
             scanf("%d",&ra);
             printf("\nInsira a nota 1: ");
@@ -55,11 +54,7 @@ int main(){
         case 3:
             printf("Aluno com a maior media: ");
             aluno = buscarMaiorMedia(L);
-            /*printf("\nNome do aluno: %s", aluno->nome);
-            printf("\nRa: %i", aluno->ra);
-            printf("\nNota 1: %f", aluno->nota1);
-            printf("\nNota 2: %f", aluno->nota2);
-            printf("\nMedia: %f", aluno->media);*/
+            mostraAluno(aluno);
             break;
         case 4:
             printf("\nInforme o RA do aluno que tera suas informacoes alteradas: ");
@@ -84,5 +79,4 @@ int main(){
         }
     } while(opcao);
     liberar(L);
-    return 0;
 }
