@@ -201,13 +201,13 @@ Alunos *alterarDados(Alunos *L){
         break;
       case 2:
         printf("Informe a nota 1:");
-        scanf(aux->n1);
+        scanf("%f", aux->nota1);
         aux->media = calcularMedia(aux->nota1, aux->nota2);
         printf("Pronto! A nova nota eh %f e a nova media eh %f", aux->nota1, aux->media);
         break;
       case 3:
         printf("Informe a nota 2:");
-        scanf(aux->nota2);
+        scanf("%f", aux->nota2);
         aux->media = calcularMedia(aux->nota1, aux->nota2);
         printf("Pronto! A nova nota eh %f e a nova media eh %f", aux->nota2, aux->media);
         break;
