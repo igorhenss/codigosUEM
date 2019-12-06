@@ -11,7 +11,7 @@ struct listaSimplesAlunos{
     struct listaSimplesAlunos *prox;
 };
 
-//MÉTODOS DE USO INTERNO
+//Mï¿½TODOS DE USO INTERNO
 int menuAtualiza(){
   int op;
   printf("\nO que deseja editar?");
@@ -41,7 +41,7 @@ Alunos *buscar(Alunos *L, int raBusca){
 }
 
 
-//MÉTODOS PARA A MAIN
+//Mï¿½TODOS PARA A MAIN
 
 Alunos *criar(){
 	return NULL;
@@ -79,10 +79,10 @@ Alunos *inserirFim(Alunos* L, char nome[50] , int ra, float n1, float n2){
 	Alunos *aux, *novo;
 	novo = alocar(nome, ra, n1, n2);
     aux = L;
-	if (aux == NULL){ // Confere se L ainda está vazia
+	if (aux == NULL){ // Confere se L ainda estï¿½ vazia
 		aux = novo;
-	}else{ // Se L não estiver vazia
-		while (aux->prox != NULL){ //roda a lista até achar o último
+	}else{ // Se L nï¿½o estiver vazia
+		while (aux->prox != NULL){ //roda a lista atï¿½ achar o ï¿½ltimo
 			aux = aux->prox;
 		}
 		aux->prox = novo;
@@ -96,7 +96,7 @@ Alunos *buscarMaiorMedia(Alunos *L){
 	Alunos *maiorMedia, *aux = L;
 	maiorMedia = NULL;
 	if(aux==NULL){
-        printf("A lista está vazia");
+        printf("A lista estï¿½ vazia");
 	}else{
         while (aux != NULL){
             if (aux->media > maiorMedia->media){
@@ -121,7 +121,7 @@ void alterarDados(Alunos *L, int raAlterar){
       case 1:
         printf("\nInforme o nome:");
         scanf("%[^\n]s", nome);
-        alunoPraMudar->nome = nome;
+        strcpy(nome, alunoPraMudar->nome);
         printf("\nPronto! O novo nome eh: %s", alunoPraMudar->nome);
         break;
       case 2:
@@ -139,7 +139,7 @@ void alterarDados(Alunos *L, int raAlterar){
         printf("\nPronto! A nova nota eh %f e a nova media eh %f", alunoPraMudar->nota2, alunoPraMudar->media);
         break;
       default:
-        printf("A opção eh invalida");
+        printf("A opï¿½ï¿½o eh invalida");
         break;
     }
   }
@@ -238,4 +238,3 @@ Alunos *excluir(Alunos *L, int ra){
 	}
 	free(L);
 }
-
