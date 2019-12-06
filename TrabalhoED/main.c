@@ -25,7 +25,7 @@ int main(){
     char nome[50];
     Alunos *L, *aluno;
     L = criar();
-    do`
+    do{
         opcao = menu();
         switch (opcao)
         {
@@ -82,7 +82,7 @@ int main(){
             mostrarReprovados(L);
             break;
         }
-    } while(opcao);
+    }while(opcao != 0);
     liberar(L);
     return 0;
 }

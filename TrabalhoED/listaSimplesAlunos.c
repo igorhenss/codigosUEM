@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "listaSimplesAlunos.h"
 
 struct listaSimplesAlunos{
@@ -10,9 +11,6 @@ struct listaSimplesAlunos{
     float media;
     struct listaSimplesAlunos *prox;
 };
-
-typedef struct listaSimplesAlunos Alunos;
-
 
 //M�TODOS DE USO INTERNO
 int menuAtualiza(){
@@ -112,7 +110,7 @@ Alunos *buscarMaiorMedia(Alunos *L){
   return maiorMedia;
 }
 
-void mostraAluno(Aluno *aluno){
+void mostraAluno(Alunos *aluno){
   if (aluno == NULL){
 		printf("Campo vazio!");
 	}else{
@@ -123,7 +121,6 @@ void mostraAluno(Aluno *aluno){
       printf("\nNota 2: %.2f", aluno->nota2);
       printf("\nMedia: %.2f", aluno->media);
       printf("\n__________________________");
-		}
 	}
 }
 
