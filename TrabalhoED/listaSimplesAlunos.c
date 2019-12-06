@@ -1,7 +1,7 @@
-#include "listaSimplesAlunos.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "listaSimplesAlunos.h"
 
 struct listaSimplesAlunos{
     char nome[50];
@@ -11,7 +11,6 @@ struct listaSimplesAlunos{
     float media;
     struct listaSimplesAlunos *prox;
 };
-
 
 //M�TODOS DE USO INTERNO
 int menuAtualiza(){
@@ -108,16 +107,16 @@ Alunos *buscarMaiorMedia(Alunos *L){
 }
 
 void mostraAluno(Alunos *aluno){
-	if (aluno == NULL){
+  if (aluno == NULL){
 		printf("Campo vazio!");
 	}else{
-		printf("\n__________________________");
-		printf("\nNome do aluno: %s", aluno->nome);
-	    printf("\nRa: %i", aluno->ra);
-	    printf("\nNota 1: %.2f", aluno->nota1);
-	    printf("\nNota 2: %.2f", aluno->nota2);
-		printf("\nMedia: %.2f", aluno->media);
-	    printf("\n__________________________");
+      printf("\n__________________________");
+			printf("\nNome do aluno: %s", aluno->nome);
+      printf("\nRa: %i", aluno->ra);
+      printf("\nNota 1: %.2f", aluno->nota1);
+      printf("\nNota 2: %.2f", aluno->nota2);
+      printf("\nMedia: %.2f", aluno->media);
+      printf("\n__________________________");
 	}
 }
 

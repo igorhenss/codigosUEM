@@ -77,6 +77,6 @@ int main(){
             mostrarReprovados(L);
             break;
         }
-    } while(opcao);
+    }while(opcao != 0);
     liberar(L);
 }
