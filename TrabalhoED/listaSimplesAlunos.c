@@ -191,35 +191,34 @@ Alunos *buscarMaiorMedia(Alunos *L){
 }
 
 Alunos *alterarDados(Alunos *L){
-  Alunos *aux = L;
+  Alunos *alunoPraMudar, *aux = L;
   int raAlterar;
   printf("Informe o RA do aluno: ");
   scanf(" %i", &raAlterar);
-  while(aux!=NULL){
-    if(aux->ra == raAlterar){
-      int op = menuAtualiza();
-      switch (op) {
-        case 1:
-          printf("Informe o nome:");
-          gets(aux->nome);
-          printf("Pronto! O novo nome eh: %s", aux->nome);
+  alunoPraMudar = buscar(aux, raAlterar);
+  if(alunoPraMudar!=NULL){
+    int op = menuAtualiza();
+    switch (op) {
+      case 1:
+        printf("Informe o nome:");
+        gets(aux->nome);
+        printf("Pronto! O novo nome eh: %s", aux->nome);
         break;
-        case 2:
-          printf("Informe a nota 1:");
-          scanf(aux->n1);
-          aux->media = calcularMedia(aux->nota1, aux->nota2);
-          printf("Pronto! A nova nota eh %f e a nova media eh %f", aux->nota1, aux->media);
+      case 2:
+        printf("Informe a nota 1:");
+        scanf(aux->n1);
+        aux->media = calcularMedia(aux->nota1, aux->nota2);
+        printf("Pronto! A nova nota eh %f e a nova media eh %f", aux->nota1, aux->media);
         break;
-        case 3:
-          printf("Informe a nota 2:");
-          scanf(aux->nota2);
-          aux->media = calcularMedia(aux->nota1, aux->nota2);
-          printf("Pronto! A nova nota eh %f e a nova media eh %f", aux->nota2, aux->media);
+      case 3:
+        printf("Informe a nota 2:");
+        scanf(aux->nota2);
+        aux->media = calcularMedia(aux->nota1, aux->nota2);
+        printf("Pronto! A nova nota eh %f e a nova media eh %f", aux->nota2, aux->media);
         break;
-        default:
-          printf("A opção eh invalida");
+      default:
+        printf("A opção eh invalida");
         break;
-      }
     }
   }
 }
