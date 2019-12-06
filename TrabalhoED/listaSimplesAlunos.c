@@ -11,10 +11,10 @@ struct listaSimplesAlunos{
     struct listaSimplesAlunos *prox;
 };
 
-//MÃ‰TODOS COM RETORNO TIPOS BÃSICOS DE DADOS
+//MÉTODOS DE USO INTERNO
 int menuAtualiza(){
   int op;
-  printf("O que deseja editar?");
+  printf("\nO que deseja editar?");
   printf("\n1-Nome do aluno");
   printf("\n2-Nota 1");
   printf("\n3-Nota 2");
@@ -26,85 +26,22 @@ float calcularMedia(float n1, float n2){
     return (n1+n2)/2;
 }
 
-void mostrar(Alunos *L){
-	Alunos *aux;
-	aux = L;
-	if (aux == NULL){
-		printf("Lista vazia!");
-	}
-	else{
-		while (aux != NULL){
-            printf("\n__________________________");
-			printf("\nNome do aluno: %s", aux->nome);
-            printf("\nRa: %i", aux->ra);
-            printf("\nNota 1: %f", aux->nota1);
-            printf("\nNota 2: %f", aux->nota2);
-            printf("\nMedia: %f", aux->media);
-            printf("\n__________________________");
-            aux = aux->prox;
+Alunos *buscar(Alunos *L, int raBusca){
+	Alunos *achou, *aux = L;
+	achou = NULL;
+	while (aux != NULL){
+		if (aux->ra == raBusca){
+			achou = aux;
+		}
+		else{
+			aux = aux->prox;
 		}
 	}
+	return achou;
 }
 
-void mostrarAprovados(Alunos *L){
-  Alunos *aux;
-	aux = L;
-	if (aux == NULL){
-		printf("Lista vazia!");
-	}
-	else{
-    printf("\nLista dos reprovados:");
-		while (aux != NULL){
-            if(aux->media>=6.0){
-                printf("\n__________________________");
-                printf("\nNome do aluno: %s", aux->nome);
-                printf("\nRa: %i", aux->ra);
-                printf("\nNota 1: %f", aux->nota1);
-                printf("\nNota 2: %f", aux->nota2);
-                printf("\nMedia: %f", aux->media);
-                printf("\n__________________________");
-            }
-            aux = aux->prox;
-		}
-	}
-}
 
-void mostrarReprovados(Alunos *L){
-  Alunos *aux;
-	aux = L;
-	if (aux == NULL){
-		printf("Lista vazia!");
-	}
-	else{
-    printf("\nLista dos reprovados:");
-		while (aux != NULL){
-            if(aux->media<6.0){
-                printf("\n__________________________");
-                printf("\nNome do aluno: %s", aux->nome);
-                printf("\nRa: %i", aux->ra);
-                printf("\nNota 1: %f", aux->nota1);
-                printf("\nNota 2: %f", aux->nota2);
-                printf("\nMedia: %f", aux->media);
-                printf("\n__________________________");
-            }
-            aux = aux->prox;
-		}
-	}
-}
-
-void liberar(Alunos *L){
-	Alunos *excluir;
-	while(L != NULL){
-	 	excluir = L;
-		L = L->prox;
-		free(excluir);
-	}
-	free(L);
-}
-
-//MÃ‰TODOS COM RETORNO TIPO Alunos
-
-
+//MÉTODOS PARA A MAIN
 
 Alunos *criar(){
 	return NULL;
@@ -141,37 +78,25 @@ Alunos *inserirInicio(Alunos* L, char nome[50] , int ra, float n1, float n2){
 Alunos *inserirFim(Alunos* L, char nome[50] , int ra, float n1, float n2){
 	Alunos *aux, *novo;
 	novo = alocar(nome, ra, n1, n2);
-  aux = L;
-	if (aux == NULL){ // Confere se L ainda estÃ¡ vazia
+    aux = L;
+	if (aux == NULL){ // Confere se L ainda está vazia
 		aux = novo;
-	}else{ // Se L nÃ£o estiver vazia
-		while (aux->prox != NULL){ //roda a lista atÃ© achar o Ãºltimo
+	}else{ // Se L não estiver vazia
+		while (aux->prox != NULL){ //roda a lista até achar o último
 			aux = aux->prox;
 		}
 		aux->prox = novo;
 	}
-	return L;
+	return aux;
 }
 
-Alunos *buscar(Alunos *L, int raBusca){
-	Alunos *aux = L;
-	while (aux != NULL){
-		if (aux->ra == raBusca){
-			return aux;
-		}
-		else{
-			aux = aux->prox;
-		}
-	}
-	return L;
-}
+
 
 Alunos *buscarMaiorMedia(Alunos *L){
 	Alunos *maiorMedia, *aux = L;
-	maiorMedia->media = 0.0;
+	maiorMedia = NULL;
 	if(aux==NULL){
-        printf("A lista estÃ¡ vazia");
-        return NULL;
+        printf("A lista está vazia");
 	}else{
         while (aux != NULL){
             if (aux->media > maiorMedia->media){
@@ -185,37 +110,103 @@ Alunos *buscarMaiorMedia(Alunos *L){
   return maiorMedia;
 }
 
-Alunos *alterarDados(Alunos *L){
+void alterarDados(Alunos *L, int raAlterar){
   Alunos *alunoPraMudar, *aux = L;
-  int raAlterar;
-  printf("Informe o RA do aluno: ");
-  scanf(" %i", &raAlterar);
+  char nome[50] ;
+  float n1, n2;
   alunoPraMudar = buscar(aux, raAlterar);
   if(alunoPraMudar!=NULL){
     int op = menuAtualiza();
-    switch (op) {
+    switch(op) {
       case 1:
-        printf("Informe o nome:");
-        gets(aux->nome);
-        printf("Pronto! O novo nome eh: %s", aux->nome);
+        printf("\nInforme o nome:");
+        scanf("%[^\n]s", nome);
+        alunoPraMudar->nome = nome;
+        printf("\nPronto! O novo nome eh: %s", alunoPraMudar->nome);
         break;
       case 2:
-        printf("Informe a nota 1:");
-        scanf("%f", aux->nota1);
-        aux->media = calcularMedia(aux->nota1, aux->nota2);
-        printf("Pronto! A nova nota eh %f e a nova media eh %f", aux->nota1, aux->media);
+        printf("\nInforme a nota 1:");
+        scanf("%f", n1);
+        alunoPraMudar->nota1 = n1;
+        alunoPraMudar->media = calcularMedia(alunoPraMudar->nota1, alunoPraMudar->nota2);
+        printf("\nPronto! A nova nota eh %f e a nova media eh %f", alunoPraMudar->nota1, alunoPraMudar->media);
         break;
       case 3:
-        printf("Informe a nota 2:");
-        scanf("%f", aux->nota2);
-        aux->media = calcularMedia(aux->nota1, aux->nota2);
-        printf("Pronto! A nova nota eh %f e a nova media eh %f", aux->nota2, aux->media);
+        printf("\nInforme a nota 2:");
+        scanf("%f", n2);
+        alunoPraMudar->nota2 = n2;
+        alunoPraMudar->media = calcularMedia(alunoPraMudar->nota1, alunoPraMudar->nota2);
+        printf("\nPronto! A nova nota eh %f e a nova media eh %f", alunoPraMudar->nota2, alunoPraMudar->media);
         break;
       default:
-        printf("A opÃ§Ã£o eh invalida");
+        printf("A opção eh invalida");
         break;
     }
   }
+}
+
+void mostrar(Alunos *L){
+	Alunos *aux;
+	aux = L;
+	if (aux == NULL){
+		printf("Lista vazia!");
+	}
+	else{
+		while (aux != NULL){
+            printf("\n__________________________");
+			printf("\nNome do aluno: %s", aux->nome);
+            printf("\nRa: %i", aux->ra);
+            printf("\nNota 1: %.2f", aux->nota1);
+            printf("\nNota 2: %.2f", aux->nota2);
+            printf("\nMedia: %.2f", aux->media);
+            printf("\n__________________________");
+            aux = aux->prox;
+		}
+	}
+}
+
+void mostrarAprovados(Alunos *L){
+    Alunos *aux;
+    aux = L;
+	if (aux == NULL){
+		printf("Lista vazia!");
+	}else{
+        printf("\nLista dos aprovados:");
+		while (aux != NULL){
+            if(aux->media>=6.0){
+                printf("\n__________________________");
+                printf("\nNome do aluno: %s", aux->nome);
+                printf("\nRa: %i", aux->ra);
+                printf("\nNota 1: %f", aux->nota1);
+                printf("\nNota 2: %f", aux->nota2);
+                printf("\nMedia: %f", aux->media);
+                printf("\n__________________________");
+            }
+            aux = aux->prox;
+		}
+	}
+}
+
+void mostrarReprovados(Alunos *L){
+    Alunos *aux;
+	aux = L;
+	if (aux == NULL){
+		printf("Lista vazia!");
+	}else{
+        printf("\nLista dos reprovados:");
+		while (aux != NULL){
+            if(aux->media<6.0){
+                printf("\n__________________________");
+                printf("\nNome do aluno: %s", aux->nome);
+                printf("\nRa: %i", aux->ra);
+                printf("\nNota 1: %f", aux->nota1);
+                printf("\nNota 2: %f", aux->nota2);
+                printf("\nMedia: %f", aux->media);
+                printf("\n__________________________");
+            }
+            aux = aux->prox;
+		}
+	}
 }
 
 Alunos *excluir(Alunos *L, int ra){
@@ -237,3 +228,14 @@ Alunos *excluir(Alunos *L, int ra){
 	}
 	return L;
  }
+
+ void liberar(Alunos *L){
+	Alunos *excluir;
+	while(L != NULL){
+	 	excluir = L;
+		L = L->prox;
+		free(excluir);
+	}
+	free(L);
+}
+

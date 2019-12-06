@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1575642554 source:c:\users\uem\desktop\codigosuem\trabalhoed\main.c
+	<stdio.h>
+	<stdlib.h>
+	"listaSimplesAlunos.h"
+
+1575639972 c:\users\uem\desktop\codigosuem\trabalhoed\listasimplesalunos.h
+
