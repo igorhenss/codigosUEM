@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-d
 #include "listaSimplesAlunos.h"
 
 struct listaSimplesAlunos{
@@ -55,7 +54,7 @@ Alunos *alocar(char nome[50] , int ra, float n1, float n2){
 	if(novo == NULL){
 		printf("Erro na reserva de memoria");
 	}else{
-		novo->nome[50] = nome;
+    strcpy(novo->nome, nome);
 		novo->ra = ra;
 		novo->nota1 = n1;
 		novo->nota2 = n2;
