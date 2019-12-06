@@ -23,7 +23,7 @@ int main(){
     int opcao, ra;
     float n1, n2, media;
     char nome[50];
-    Alunos *L;
+    Alunos *L, *aluno;
     L = criar();
     do{
         opcao = menu();
@@ -53,7 +53,12 @@ int main(){
             break;
         case 3:
             printf("Aluno com maior media: ");
-            buscarMaiorMedia(L);
+            aluno = buscarMaiorMedia(L);
+    		    printf("\nNome do aluno: %s", aluno->nome);
+            printf("\nRa: %i", aluno->ra);
+            printf("\nNota 1: %f", aluno->nota1);
+            printf("\nNota 2: %f", aluno->nota2);
+            printf("\nMedia: %f", aluno->media);
             break;
         case 4:
             alterarDados(L);

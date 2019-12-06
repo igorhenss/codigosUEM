@@ -144,14 +144,13 @@ Alunos *inserirFim(Alunos* L, char nome[50] , int ra, float n1, float n2){
   aux = L;
 	if (aux == NULL){ // Confere se L ainda está vazia
 		aux = novo;
-    novo->prox = NULL;
 	}else{ // Se L não estiver vazia
 		while (aux->prox != NULL){ //roda a lista até achar o último
 			aux = aux->prox;
 		}
 		aux->prox = novo;
 	}
-	return aux;
+	return L;
 }
 
 Alunos *buscar(Alunos *L, int raBusca){
@@ -164,7 +163,7 @@ Alunos *buscar(Alunos *L, int raBusca){
 			aux = aux->prox;
 		}
 	}
-	return aux;
+	return L;
 }
 
 Alunos *buscarMaiorMedia(Alunos *L){
@@ -182,12 +181,8 @@ Alunos *buscarMaiorMedia(Alunos *L){
                 aux = aux->prox;
             }
         }
-		printf("\nNome do aluno: %s", maiorMedia->nome);
-        printf("\nRa: %i", maiorMedia->ra);
-        printf("\nNota 1: %f", maiorMedia->nota1);
-        printf("\nNota 2: %f", maiorMedia->nota2);
-        printf("\nMedia: %f", maiorMedia->media);
 	}
+  return maiorMedia;
 }
 
 Alunos *alterarDados(Alunos *L){
@@ -229,8 +224,7 @@ Alunos *excluir(Alunos *L, int ra){
 	if(excluir != NULL){
 		if (aux == excluir){ 	//se for excluir o primeiro
 			aux = excluir->prox;
-		}
-		else{
+		}else{
 			while(aux->prox!= excluir) {
 				aux = aux->prox;
 			}
